@@ -1,6 +1,6 @@
 const params = window.location.search.replace("?", "").split("&").map((i) => ({ name: i.split("=")[0], value: i.split("=")[1] }));
 const paths = window.location.pathname.split("/");
-const articles = fetch("./data/preview-articles.json");
+const articles = fetch("./data/preview-articles.json").then((response) => response.json());
 
 const article = articles.find((a) => a.version == params.find((p) => p.name == "version")?.value);
 if (article) {
