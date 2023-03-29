@@ -2,26 +2,8 @@ const params = window.location.search.replace("?", "").split("&").map((i) => ({ 
 const paths = window.location.pathname.split("/");
 (
 	async () => {
-		const articles = await fetch(
-			(
-				params.find((p) => p.name == "beta")?.value || "false" == true
-					? "./data/preview-articles.json"
-					: "./data/stable-articles.json"
-			),
-		).then((response) => response.json());
-
-		const article = articles.find((a) => a.version == params.find((p) => p.name == "version")?.value);
-		if (article) {
-			document.getElementById("articleTitle").innerText = article.article.title;
-			document.getElementById("articleBody").innerHTML = article.article.body.replaceAll("font-family: 'Segoe UI',sans-serif;", "font-family: 'MinecraftTen';");
-		} else {
-			document.getElementById("articleTitle").innerText = "Version not found!";
-			document.getElementById("articleBody").innerHTML = "This version is not found, try searching for a different version.";
-			document.getElementById("articleBody").style = "text-align: center;";
-		};
-
-		console.log("Version:", article?.version || "???");
-		console.log("Beta:", params.find((p) => p.name == "beta")?.value || "false" == true);
-		console.log(article);
+		const articles = await fetch("./data/preview-articles.json").then((response) => response.json());
+		for (const article of articles)
+			document.getElementById("articles").innerHTML = `<li class="article-list-item "><a href="/changelog?version=${article.version}&beta=true" class="article-list-link">${article.article.title}</a></li>`;
 	}
 )();
