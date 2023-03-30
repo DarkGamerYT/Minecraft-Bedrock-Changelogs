@@ -4,20 +4,20 @@ const paths = window.location.pathname.split("/");
 	async () => {
 		if (!params.find((p) => p.name == "version")) return window.location.href = "/";
 		document.getElementById("articleTypes").innerText = (
-			((params.find((p) => p.name == "beta")?.value || "false") == true)
+			((params.find((p) => p.name == "beta")?.value || "false") == "true")
 				? "Beta and Preview Changelogs"
 				: "Release Changelogs"
 		);
 		
 		document.getElementById("articleTypes").href = (
-			((params.find((p) => p.name == "beta")?.value || "false") == true)
+			((params.find((p) => p.name == "beta")?.value || "false") == "true")
 				? "./changelogs?beta=true"
 				: "./changelogs"
 		);
 		
 		const articles = await fetch(
 			(
-				((params.find((p) => p.name == "beta")?.value || "false") == true)
+				((params.find((p) => p.name == "beta")?.value || "false") == "true")
 					? "./data/preview-articles.json"
 					: "./data/stable-articles.json"
 			),
