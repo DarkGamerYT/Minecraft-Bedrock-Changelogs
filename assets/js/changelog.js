@@ -4,14 +4,14 @@ const paths = window.location.pathname.split("/");
 	async () => {
 		if (!params.find((p) => p.name == "version")) return window.location.href = "/";
 		document.getElementById("articleTypes").innerText = (
-			params.find((p) => p.name == "beta")?.value || "false" == true
+			((params.find((p) => p.name == "beta")?.value || "false") == true)
 				? "Beta and Preview Changelogs"
 				: "Release Changelogs"
 		);
 		
 		const articles = await fetch(
 			(
-				params.find((p) => p.name == "beta")?.value || "false" == true
+				((params.find((p) => p.name == "beta")?.value || "false") == true)
 					? "./data/preview-articles.json"
 					: "./data/stable-articles.json"
 			),
@@ -29,7 +29,7 @@ const paths = window.location.pathname.split("/");
 		};
 
 		console.log("Version:", article?.version || "???");
-		console.log("Beta:", params.find((p) => p.name == "beta")?.value || "false" == true);
+		console.log("Beta:", ((params.find((p) => p.name == "beta")?.value || "false") == true));
 		console.log(article);
 	}
 )();

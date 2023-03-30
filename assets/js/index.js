@@ -3,7 +3,7 @@ const paths = window.location.pathname.split("/");
 (
 	async () => {
 		const betaText = (
-			params.find((p) => p.name == "beta")?.value || "false" == true
+			((params.find((p) => p.name == "beta")?.value || "false") == true)
 				? "Beta and Preview Changelogs"
 				: "Release Changelogs"
 		);
@@ -14,7 +14,7 @@ const paths = window.location.pathname.split("/");
 		
 		const articles = await fetch(
 			(
-				params.find((p) => p.name == "beta")?.value || "false" == true
+				((params.find((p) => p.name == "beta")?.value || "false") == true)
 					? "./data/preview-articles.json"
 					: "./data/stable-articles.json"
 			),
