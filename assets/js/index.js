@@ -19,6 +19,6 @@ const paths = window.location.pathname.split("/");
 					: "./data/stable-articles.json"
 			),
 		).then((response) => response.json());
-		document.getElementById("articles").innerHTML = articles.map((article) => `<li class="article-list-item "><a href="./changelog?version=${article.version}&beta=true" class="article-list-link">${article.article.title}</a></li>`).join("");
+		document.getElementById("articles").innerHTML = articles.map((article) => `<li class="article-list-item "><a href="./changelog?version=${article.version}&beta=${params.find((p) => p.name == "beta")?.value || "false" == true}" class="article-list-link">${article.article.title}</a></li>`).join("");
 	}
 )();
