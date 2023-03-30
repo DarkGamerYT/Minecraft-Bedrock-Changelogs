@@ -3,6 +3,12 @@ const paths = window.location.pathname.split("/");
 (
 	async () => {
 		if (!params.find((p) => p.name == "version")) return window.location.href = "/";
+		document.getElementById("articleTypes").innerText = (
+			params.find((p) => p.name == "beta")?.value || "false" == true
+				? "Beta and Preview Changelogs"
+				: "Release Changelogs"
+		);
+		
 		const articles = await fetch(
 			(
 				params.find((p) => p.name == "beta")?.value || "false" == true

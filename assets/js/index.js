@@ -2,7 +2,23 @@ const params = window.location.search.replace("?", "").split("&").map((i) => ({ 
 const paths = window.location.pathname.split("/");
 (
 	async () => {
-		const articles = await fetch("./data/preview-articles.json").then((response) => response.json());
-		document.getElementById("articles").innerHTML = articles.map((article) => `<li class="article-list-item "><a href="./changelog?version=${article.version}&beta=true" class="article-list-link">${article.article.title}</a></li>`);
+		const betaText = (
+			params.find((p) => p.name == "beta")?.value || "false" == true
+				? "Beta and Preview Changelogs"
+				: "Release Changelogs"
+		);
+		
+		document.getElementById("articleTypesTitle").innerText = betaText;
+		document.getElementById("articleTypes").innerText = betaText;
+		document.title = betaText + " - Minecraft Bedrock Changelogs";
+		
+		const articles = await fetch(
+			(
+				params.find((p) => p.name == "beta")?.value || "false" == true
+					? "./data/preview-articles.json"
+					: "./data/stable-articles.json"
+			),
+		).then((response) => response.json());
+		document.getElementById("articles").innerHTML = articles.map((article) => `<li class="article-list-item "><a href="./changelog?version=${article.version}&beta=true" class="article-list-link">${article.article.title}</a></li>`).join("");
 	}
 )();
