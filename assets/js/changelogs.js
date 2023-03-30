@@ -10,6 +10,11 @@ const paths = window.location.pathname.split("/");
 		
 		document.getElementById("articleTypesTitle").innerText = betaText;
 		document.getElementById("articleTypes").innerText = betaText;
+		document.getElementById("articleTypes").href = (
+			((params.find((p) => p.name == "beta")?.value || "false") == true)
+				? "./changelogs?beta=true"
+				: "./changelogs"
+		);
 		document.title = betaText + " - Minecraft Bedrock Changelogs";
 		
 		const articles = await fetch(

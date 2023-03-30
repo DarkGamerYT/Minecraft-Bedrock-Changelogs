@@ -11,8 +11,8 @@ const paths = window.location.pathname.split("/");
 		
 		document.getElementById("articleTypes").href = (
 			((params.find((p) => p.name == "beta")?.value || "false") == true)
-				? "/changelogs?beta=true"
-				: "/changelogs"
+				? "./changelogs?beta=true"
+				: "./changelogs"
 		);
 		
 		const articles = await fetch(
